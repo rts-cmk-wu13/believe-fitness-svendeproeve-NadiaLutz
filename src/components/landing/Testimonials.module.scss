@@ -1,0 +1,79 @@
+@use "../../styles/tokens" as *;
+
+.testimonials {
+  padding: 3rem 1rem;
+  background-color: $color-bg-dark;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.testimonialsTitle {
+  color: $color-text-light;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.testimonialsTrack {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.testimonialsCard {
+  scroll-snap-align: center;
+  flex: 0 0 85%;
+  background-color: #2a2a2a;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.testimonialsText {
+  color: $color-text-light;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.testimonialsName {
+  color: $color-primary;
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin-block-start: 0.5rem;
+}
+
+.testimonialsOccupation {
+  color: $color-text-muted;
+  font-size: 0.75rem;
+}
+
+.testimonialsControls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.testimonialsBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.25rem;
+  background-color: #2a2a2a;
+  color: $color-text-light;
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-text-dark;
+  }
+}

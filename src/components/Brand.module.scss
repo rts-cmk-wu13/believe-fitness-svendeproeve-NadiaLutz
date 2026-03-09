@@ -1,0 +1,23 @@
+@use "../styles/tokens" as *;
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.brandName {
+  color: $color-primary;
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.brandTagline {
+  color: $color-text-dark;
+  font-size: 1.125rem;
+  font-weight: 900;
+}

@@ -1,0 +1,50 @@
+@use "../../styles/tokens" as *;
+
+.hero {
+  position: relative;
+  min-height: 35vh;
+  display: flex;
+  align-items: flex-end;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("/imgs/welcome.jpg") center / cover no-repeat;
+    opacity: 0.6;
+  }
+}
+
+
+.heroContent {
+  position: relative;
+  padding: 2rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+
+.heroHeading {
+  color: $color-primary;
+   font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 1.4;
+}
+
+.heroActions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.heroBtn {
+  padding: 0.75rem 1.75rem;
+  background-color: $color-primary;
+  color: $color-text-dark;
+  font-weight: 700;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07rem;
+  border-radius: 5rem;
+}
+
