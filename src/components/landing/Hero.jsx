@@ -1,11 +1,15 @@
 "use client"
 
 import Link from "next/link"
+import BurgerBtn from "@/components/nav/BurgerBtn"
 import styles from "./Hero.module.scss"
 
 export default function Hero() {
   return (
     <section className={styles.hero}>
+      <div className={styles.heroBurger}>
+        <BurgerBtn />
+      </div>
       <div className={styles.heroContent}>
         <h1 className={styles.heroHeading}>Welcome to<br />Believe Fitness</h1>
         <div className={styles.heroActions}>

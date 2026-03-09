@@ -12,7 +12,7 @@ export default function ContactForm() {
       <section className={styles.contact}>
         <h2 className={styles.contactTitle}>Contact us</h2>
         <p className={styles.contactSubtitle}>Ask us anything about Believe Fitness!</p>
-        <p className={styles.contactMessage}>Thanks for your message! We will get back to you as soon as possible.</p>
+        <p className={styles.contactMessage}>Thanks for your message! <br />We will get back to you as soon as possible.</p>
       </section>
     )
   }
@@ -51,7 +51,7 @@ export default function ContactForm() {
             className={styles.contactTextarea}
             name="message"
             placeholder="Enter your message..."
-            rows={6}
+            rows={4}
           />
           {state?.errors?.message && (
             <p role="alert" className={styles.contactError}>{state.errors.message[0]}</p>

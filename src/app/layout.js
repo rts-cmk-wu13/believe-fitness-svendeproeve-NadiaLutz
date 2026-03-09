@@ -1,4 +1,6 @@
 import "./globals.scss"
+import { NavProvider } from "@/components/nav/NavContext"
+import Nav from "@/components/nav/Nav"
 
 export const metadata = {
   title: "Believe Fitness",
@@ -8,7 +10,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <NavProvider>
+          <Nav />
+          {children}
+        </NavProvider>
+      </body>
     </html>
   )
 }

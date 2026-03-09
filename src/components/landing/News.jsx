@@ -8,7 +8,7 @@ export default function News() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    bfFetch("/news").then((res) => {
+    bfFetch("/v1/news").then((res) => {
       if (res.ok && Array.isArray(res.data)) setPosts(res.data)
     })
   }, [])
@@ -19,17 +19,15 @@ export default function News() {
       <ul className={styles.newsList}>
         {posts.map((post) => (
           <li key={post.id} className={styles.newsItem}>
-            {post.image && (
+            <h3 className={styles.newsHeading}>{post.title}</h3>
+            {post.asset && (
               <img
                 className={styles.newsImage}
-                src={post.image}
+                src={post.asset.url}
                 alt={post.title}
               />
             )}
-            <div className={styles.newsBody}>
-              <h3 className={styles.newsHeading}>{post.title}</h3>
-              <p className={styles.newsExcerpt}>{post.excerpt ?? post.content}</p>
-            </div>
+            <p className={styles.newsText}>{post.text}</p>
           </li>
         ))}
       </ul>

@@ -1,4 +1,4 @@
-# Titel
-Navn, hold
+# Believe Fitness 
+Nadia Lützhøft, WU13
 
 Valgfri opgave

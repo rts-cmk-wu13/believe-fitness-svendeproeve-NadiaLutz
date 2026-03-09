@@ -1,0 +1,32 @@
+@use "../../styles/tokens" as *;
+
+.nav {
+  position: fixed;
+  inset: 0;
+  background-color: $color-bg-light;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 2rem;
+  z-index: 100;
+}
+
+.navClose {
+  align-self: flex-end;
+  color: $color-icon-light;
+  font-size: 1.5rem;
+  padding: 0.25rem;
+}
+
+.navList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.25rem;
+  margin-block-start: 7rem;
+}
+
+.navLink {
+  color: $color-text-dark;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+}

@@ -4,7 +4,7 @@ const API_BASE = process.env.API_URL
 
 async function handler(request, { params }) {
   const { path } = await params
-  const url = `${API_BASE}/${path.join("/")}`
+  const url = `${API_BASE}/api/${path.join("/")}`
   const res = await fetch(url, {
     method: request.method,
     headers: { "Content-Type": "application/json" },

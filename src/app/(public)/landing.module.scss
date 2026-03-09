@@ -1,19 +1,26 @@
 @use "../../styles/tokens" as *;
 
 .landing {
-  max-width: 25.625rem;
-  margin-inline: auto;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: $color-bg-light;
 }
 
 .landingFooter {
-  padding: 3rem 1rem;
+  padding: 1.5rem 1rem 3rem;
   background-color: $color-bg-light;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  border-top: 1px solid $color-border;
+  gap: 1.25rem;
+
+  &::before {
+    content: "";
+    width: 2.75rem;
+    height: 2px;
+    background-color: $color-bg-dark;
+  }
 }
 
 .landingAddress {
@@ -23,6 +30,5 @@
   flex-direction: column;
   gap: 0.25rem;
   color: $color-text-dark;
-  font-size: 0.875rem;
-
+  font-size: 1rem;
 }

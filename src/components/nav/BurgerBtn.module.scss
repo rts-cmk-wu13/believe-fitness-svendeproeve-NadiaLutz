@@ -1,0 +1,12 @@
+@use "../../styles/tokens" as *;
+
+.burgerBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-bg-light;
+  background: none;
+  border: none;
+  padding: 0.25rem;
+  margin-block-start: 1.5rem;
+}

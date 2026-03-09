@@ -1,7 +1,7 @@
 @use "../../styles/tokens" as *;
 
 .contact {
-  padding: 3rem 1rem;
+  padding: 3rem 1rem 1rem;
   background-color: $color-bg-light;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   background-color: $color-bg-light;
   border: 1px solid $color-border;
   border-radius: 5rem;
-  color: $color-text-light;
+  color: $color-text-dark;
   font-size: 1rem;
   resize: vertical;
 
@@ -47,7 +47,7 @@
 
   &:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: $color-primary;
   }
 }
 
@@ -56,11 +56,11 @@
 }
 
 .contactBtn {
-  padding: 0.875rem;
+  padding: 1.25rem 0.875rem;
   background-color: $color-primary;
   color: $color-text-dark;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   border-radius: 5rem;
@@ -71,8 +71,12 @@
 }
 
 .contactMessage {
-  color: $color-success;
+  color: $color-text-dark;
   font-size: 1rem;
+  text-align: center;
+  border: 1px solid $color-primary;
+  border-radius: 1rem;
+  padding: 0.5rem;
 }
 
 .contactError {
