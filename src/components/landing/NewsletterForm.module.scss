@@ -38,11 +38,12 @@
 
 .newsletterInput {
   padding-inline: 1rem 2rem;
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: $color-bg-light;
   border: 1px solid $color-border;
   border-radius: 5rem;
-  color: $color-text-light;
+  color: $color-text-dark;
   font-size: 1rem;
+  resize: vertical;
 
   &::placeholder {
     color: $color-placeholder;
@@ -50,8 +51,9 @@
 
   &:focus {
     outline: none;
-    border-color: rgba(255, 255, 255, 0.5);
+    border-color: $color-primary;
   }
+
 }
 
 .newsletterBtn {

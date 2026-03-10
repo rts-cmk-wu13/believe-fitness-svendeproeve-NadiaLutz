@@ -8,7 +8,7 @@ export default function News() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    bfFetch("/v1/news").then((res) => {
+    bfFetch("/api/v1/news").then((res) => {
       if (res.ok && Array.isArray(res.data)) setPosts(res.data)
     })
   }, [])

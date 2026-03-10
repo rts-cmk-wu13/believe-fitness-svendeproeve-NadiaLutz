@@ -10,7 +10,7 @@ export default function Testimonials() {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    bfFetch("/v1/testimonials").then((res) => {
+    bfFetch("/api/v1/testimonials").then((res) => {
       if (res.ok) {
         const arr = Array.isArray(res.data) ? res.data : res.data?.data ?? []
         setItems(arr)

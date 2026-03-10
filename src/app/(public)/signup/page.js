@@ -30,10 +30,12 @@ export default function SignupPage() {
     setServerError(null)
     setIsPending(true)
 
-    const { name, email, password } = result.data
-    const res = await bfFetch("/v1/users", {
+    const { email, password } = result.data
+    const body = new URLSearchParams({ username: email, password })
+    const res = await bfFetch("/api/v1/users", {
       method: "POST",
-      body: JSON.stringify({ name, email, password }),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString(),
     })
 
     if (!res.ok) {

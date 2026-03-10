@@ -29,13 +29,13 @@ export default function NewsletterForm() {
           placeholder="Enter your email..."
           autoComplete="email"
         />
-        {state?.errors?.email && (
-          <p role="alert" className={styles.newsletterError}>{state.errors.email[0]}</p>
-        )}
         <button className={styles.newsletterBtn} type="submit" disabled={isPending}>
           {isPending ? "Sending..." : "Sign up"}
         </button>
       </form>
+      {state?.errors?.email && (
+        <p role="alert" className={styles.newsletterError}>{state.errors.email[0]}</p>
+      )}
     </section>
   )
 }

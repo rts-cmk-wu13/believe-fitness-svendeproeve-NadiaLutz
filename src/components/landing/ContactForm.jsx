@@ -10,8 +10,6 @@ export default function ContactForm() {
   if (state?.success) {
     return (
       <section className={styles.contact}>
-        <h2 className={styles.contactTitle}>Contact us</h2>
-        <p className={styles.contactSubtitle}>Ask us anything about Believe Fitness!</p>
         <p className={styles.contactMessage}>Thanks for your message! <br />We will get back to you as soon as possible.</p>
       </section>
     )
