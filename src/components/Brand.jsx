@@ -1,9 +1,9 @@
 import styles from "./Brand.module.scss"
 
-export default function Brand() {
+export default function Brand({ className }) {
   return (
-    <div className={styles.brand}>
-      <p className={styles.brandName}>Believe Fitness</p>
+    <div className={`${styles.brand} ${className}`}>
+      <h1 className={styles.brandName}>Believe Fitness</h1>
       <p className={styles.brandTagline}>Train like a pro</p>
     </div>
   )

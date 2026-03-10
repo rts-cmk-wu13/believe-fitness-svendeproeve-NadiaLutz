@@ -1,6 +1,7 @@
 @use "../../styles/tokens" as *;
 
 .testimonials {
+  height: 21rem;
   padding: 1.75rem 1.5rem;
   background-color: $color-bg-dark;
   display: flex;
@@ -8,6 +9,8 @@
   align-items: center;
   gap: 1.5rem;
   text-align: center;
+  line-height: 1;
+  position: relative;
 }
 
 .testimonialsTitle {
@@ -15,34 +18,38 @@
   font-size: 1.5rem;
   font-weight: 700;
   max-width: 12ch;
+  margin-block-start: 1rem;
 }
 
 .testimonialsText {
   color: $color-text-light;
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.5;
 }
 
 .testimonialsName {
   color: $color-text-light;
   font-size: 1rem;
   font-weight: 700;
+  position: absolute;
+  bottom: 5.5rem;
 }
 
 .testimonialsControls {
   display: flex;
   gap: 0.75rem;
+  position: absolute;
+  bottom: 1.5rem;
 }
 
 .testimonialsBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.6rem;
+  height: 2.6rem;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.1);
   color: $color-text-light;
   border: 1px solid $color-text-light;
-  margin-block-end: 1rem;
 }
