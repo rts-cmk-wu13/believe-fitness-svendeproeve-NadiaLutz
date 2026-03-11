@@ -14,11 +14,11 @@ Eftermiddag - 15.40
 ## Dag 2
 
 Morgen - 12.07
-Eftermiddag - (tidspunkt)
+Eftermiddag - 15.32
 
 ## Dag 3
 
-Morgen - (tidspunkt)  
+Morgen - 11.04
 Eftermiddag - (tidspunkt)
 
 ## Dag 4

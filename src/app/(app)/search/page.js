@@ -1,3 +1,11 @@
+"use client"
+
+import PageHeader from "@/components/PageHeader"
+
 export default function SearchPage() {
-  return <div>Search</div>
+  return (
+    <main>
+      <PageHeader title="Search" showBack />
+    </main>
+  )
 }
