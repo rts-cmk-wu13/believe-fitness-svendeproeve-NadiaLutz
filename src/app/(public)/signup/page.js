@@ -18,8 +18,12 @@ export default function SignupPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const formData = Object.fromEntries(new FormData(e.target))
-    const result = signupSchema.safeParse(formData)
+    const result = signupSchema.safeParse({
+      name: e.target.name.value,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      repeatPassword: e.target.repeatPassword.value,
+    })
 
     if (!result.success) {
       setErrors(result.error.flatten().fieldErrors)
@@ -52,7 +56,7 @@ export default function SignupPage() {
     <main className={styles.page}>
       <BurgerBtn className={styles.burgerBtn} />
       <Brand className={styles.brand} />
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.heading}>Sign up as a new user</h2>
 
         <div className={styles.field}>
@@ -61,11 +65,8 @@ export default function SignupPage() {
             type="text"
             name="name"
             placeholder="Enter your name..."
-            autoComplete="name"
           />
-          {errors.name && (
-            <p role="alert" className={styles.error}>{errors.name[0]}</p>
-          )}
+          {errors.name && <p className={styles.error}>{errors.name[0]}</p>}
         </div>
 
         <div className={styles.field}>
@@ -74,11 +75,8 @@ export default function SignupPage() {
             type="email"
             name="email"
             placeholder="Enter your email..."
-            autoComplete="email"
           />
-          {errors.email && (
-            <p role="alert" className={styles.error}>{errors.email[0]}</p>
-          )}
+          {errors.email && <p className={styles.error}>{errors.email[0]}</p>}
         </div>
 
         <div className={styles.field}>
@@ -87,11 +85,8 @@ export default function SignupPage() {
             type="password"
             name="password"
             placeholder="Enter your password..."
-            autoComplete="new-password"
           />
-          {errors.password && (
-            <p role="alert" className={styles.error}>{errors.password[0]}</p>
-          )}
+          {errors.password && <p className={styles.error}>{errors.password[0]}</p>}
         </div>
 
         <div className={styles.field}>
@@ -100,16 +95,11 @@ export default function SignupPage() {
             type="password"
             name="repeatPassword"
             placeholder="Repeat your password..."
-            autoComplete="new-password"
           />
-          {errors.repeatPassword && (
-            <p role="alert" className={styles.error}>{errors.repeatPassword[0]}</p>
-          )}
+          {errors.repeatPassword && <p className={styles.error}>{errors.repeatPassword[0]}</p>}
         </div>
 
-        {serverError && (
-          <p role="alert" className={styles.error}>{serverError}</p>
-        )}
+        {serverError && <p className={styles.error}>{serverError}</p>}
 
         <button className={styles.btn} type="submit" disabled={isPending}>
           {isPending ? "Signing up..." : "Sign up"}

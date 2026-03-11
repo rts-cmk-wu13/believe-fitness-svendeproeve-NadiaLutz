@@ -85,18 +85,17 @@ export default function ClassDetailPage() {
     (c) => c.classDay === cls.classDay && String(c.id) !== String(id)
   )
 
-  function joinButton() {
-    if (!isLoggedIn) return null
+  let joinBtn = null
+  if (isLoggedIn && !isAdmin) {
     if (enrolled) {
-      return <button className={styles.btn} onClick={handleLeave} disabled={loading}>Leave class</button>
+      joinBtn = <button className={styles.btn} onClick={handleLeave} disabled={loading}>Leave class</button>
+    } else if (isFull) {
+      joinBtn = <button className={styles.btn} disabled>Class is full</button>
+    } else if (sameDayConflict) {
+      joinBtn = <button className={styles.btn} disabled>Already have a class this day</button>
+    } else {
+      joinBtn = <button className={styles.btn} onClick={handleJoin} disabled={loading}>Sign up</button>
     }
-    if (isFull) {
-      return <button className={styles.btn} disabled>Class is full</button>
-    }
-    if (sameDayConflict) {
-      return <button className={styles.btn} disabled>Already have a class this day</button>
-    }
-    return <button className={styles.btn} onClick={handleJoin} disabled={loading}>Sign up</button>
   }
 
   return (
@@ -127,7 +126,7 @@ export default function ClassDetailPage() {
           </div>
         </div>
 
-        {!isAdmin && joinButton()}
+        {joinBtn}
       </div>
     </main>
   )

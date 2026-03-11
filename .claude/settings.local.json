@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(find c:/Users/L1kfe/sites/svendeprove-believe-fitness-api -name *.db -o -name *.sqlite)"
+      "Bash(find c:/Users/L1kfe/sites/svendeprove-believe-fitness-api -name *.db -o -name *.sqlite)",
+      "Bash(ls \"c:/Users/L1kfe/sites/believe-fitness-svendeproeve-nadialutz/src/app/\\(app\\)/classes/\")"
     ]
   }
 }

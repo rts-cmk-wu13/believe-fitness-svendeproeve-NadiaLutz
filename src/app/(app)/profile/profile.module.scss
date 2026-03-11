@@ -9,19 +9,19 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem 1rem 1rem;
+  padding: 1.75rem 1rem 1rem;
 
   .avatar {
-    font-size: 3.5rem;
+    font-size: 4rem;
     background: $color-primary;
     fill: $color-icon-dark;
-    padding: 0.75rem;
+    padding: 1rem;
     border-radius: 50%;
 
   }
 
   .name {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.25rem;
     color: $color-text-dark;
     margin: 0;

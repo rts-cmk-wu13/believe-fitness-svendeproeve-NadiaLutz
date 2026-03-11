@@ -11,7 +11,7 @@ export default function PageHeader({ title, showBack, light }) {
   return (
     <header className={`${styles.header} ${light ? styles.light : ""}`}>
       {showBack ? (
-        <button className={styles.backBtn} onClick={() => router.back()} aria-label="Go back">
+        <button className={styles.backBtn} onClick={() => router.back()}>
           <IoArrowBack />
         </button>
       ) : null}

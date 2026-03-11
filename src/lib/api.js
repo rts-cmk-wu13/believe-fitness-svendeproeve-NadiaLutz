@@ -1,7 +1,5 @@
-import { API_BASE } from "./config"
-
 export async function bfFetch(path, options = {}) {
-  const res = await fetch(`${API_BASE}${path}`, {
+  const res = await fetch(`/api/bf${path}`, {
     headers: { "Content-Type": "application/json" },
     ...options,
   })

@@ -17,8 +17,10 @@ export default function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault()
-    const formData = Object.fromEntries(new FormData(e.target))
-    const result = loginSchema.safeParse(formData)
+    const result = loginSchema.safeParse({
+      username: e.target.username.value,
+      password: e.target.password.value,
+    })
 
     if (!result.success) {
       setErrors(result.error.flatten().fieldErrors)
@@ -44,7 +46,7 @@ export default function LoginPage() {
     <main className={styles.page}>
       <BurgerBtn className={styles.burgerBtn} />
       <Brand className={styles.brand} />
-      <form className={styles.form} onSubmit={handleSubmit} noValidate>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <h2 className={styles.heading}>Log in with your credentials</h2>
 
         <div className={styles.field}>
@@ -53,11 +55,8 @@ export default function LoginPage() {
             type="text"
             name="username"
             placeholder="Enter your email..."
-            autoComplete="username"
           />
-          {errors.username && (
-            <p role="alert" className={styles.error}>{errors.username[0]}</p>
-          )}
+          {errors.username && <p className={styles.error}>{errors.username[0]}</p>}
         </div>
 
         <div className={styles.field}>
@@ -66,16 +65,11 @@ export default function LoginPage() {
             type="password"
             name="password"
             placeholder="Enter your password..."
-            autoComplete="current-password"
           />
-          {errors.password && (
-            <p role="alert" className={styles.error}>{errors.password[0]}</p>
-          )}
+          {errors.password && <p className={styles.error}>{errors.password[0]}</p>}
         </div>
 
-        {serverError && (
-          <p role="alert" className={styles.error}>{serverError}</p>
-        )}
+        {serverError && <p className={styles.error}>{serverError}</p>}
 
         <button className={styles.btn} type="submit" disabled={isPending}>
           {isPending ? "Logging in..." : "Log in"}

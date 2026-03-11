@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import { bfFetch } from "@/lib/api"
 
 const NavContext = createContext(null)
@@ -10,6 +10,12 @@ export function NavProvider({ children }) {
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
   const [role, setRole] = useState(null)
+
+  useEffect(() => {
+    setToken(localStorage.getItem("token"))
+    setUserId(localStorage.getItem("userId"))
+    setRole(localStorage.getItem("role"))
+  }, [])
 
   const isLoggedIn = !!token
   const isAdmin = role === "admin"
@@ -28,6 +34,9 @@ export function NavProvider({ children }) {
       setToken(res.data.token)
       setUserId(res.data.userId)
       setRole(res.data.role)
+      localStorage.setItem("token", res.data.token)
+      localStorage.setItem("userId", res.data.userId)
+      localStorage.setItem("role", res.data.role)
       return true
     }
     return false
@@ -37,6 +46,9 @@ export function NavProvider({ children }) {
     setToken(null)
     setUserId(null)
     setRole(null)
+    localStorage.removeItem("token")
+    localStorage.removeItem("userId")
+    localStorage.removeItem("role")
   }
 
   return (

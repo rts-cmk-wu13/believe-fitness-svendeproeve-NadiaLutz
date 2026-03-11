@@ -39,7 +39,7 @@ export default function ProfilePage() {
         headers: { Authorization: `Bearer ${token}` },
       }).then((res) => {
         if (res.ok) {
-          const data = Array.isArray(res.data) ? res.data : res.data?.data ?? []
+          const data = res.data?.data ?? res.data ?? []
           Promise.all(
             data.map((cls) =>
               bfFetch(`/api/v1/classes/${cls.id}`, {
@@ -70,9 +70,7 @@ export default function ProfilePage() {
 
   if (!isLoggedIn) return null
 
-  const fullName = user
-    ? [user.userFirstName, user.userLastName].filter(Boolean).join(" ") || user.username
-    : ""
+  const fullName = user ? (user.userFirstName + " " + user.userLastName).trim() || user.username : ""
   const role = user?.role === "admin" ? "Instructor" : "Member"
 
 

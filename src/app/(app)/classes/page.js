@@ -28,19 +28,16 @@ export default function ClassesPage() {
   useEffect(() => {
     bfFetch("/api/v1/classes").then(async (res) => {
       if (res.ok) {
-        const data = Array.isArray(res.data) ? res.data : res.data?.data ?? []
+        const data = res.data?.data ?? res.data ?? []
         setClasses(data)
-        if (data.length > 0) {
-          setFeatured(data[Math.floor(Math.random() * data.length)])
-        }
+        setFeatured(data[Math.floor(Math.random() * data.length)] ?? null)
 
         const ratingsResults = await Promise.all(
           data.map((cls) => bfFetch(`/api/v1/classes/${cls.id}/ratings`))
         )
         const ratingsMap = {}
         data.forEach((cls, i) => {
-          const r = ratingsResults[i]
-          ratingsMap[cls.id] = r.ok ? (Array.isArray(r.data) ? r.data : r.data?.data ?? []) : []
+          ratingsMap[cls.id] = ratingsResults[i].ok ? ratingsResults[i].data ?? [] : []
         })
         setRatings(ratingsMap)
       }

@@ -1,0 +1,168 @@
+@use "../../../../styles/tokens" as *;
+
+.page {
+  min-height: 100vh;
+  background-color: $color-bg-light;
+}
+
+.heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $color-text-dark;
+  margin-block: 3rem 0.25rem;
+}
+
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+
+
+.input,
+.textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid $color-border;
+  border-radius: 5rem;
+  background: none;
+  font-family: inherit;
+  font-size: 1rem;
+  color: $color-text-dark;
+  outline: none;
+  font-weight: 300;
+
+  &::placeholder {
+    color: $color-placeholder;
+  }
+}
+
+.textarea {
+  border-radius: 1rem;
+  resize: none;
+}
+
+.customSelect {
+  position: relative;
+  flex: 1;
+}
+
+.selectBtn {
+  width: 100%;
+  text-align: left;
+}
+
+.selectPlaceholder {
+  color: $color-placeholder;
+}
+
+.classTime {
+  font-weight: 600;
+  color: $color-text-dark;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  background: $color-bg-light;
+  border: 1px solid $color-border;
+  border-radius: 1rem;
+  max-height: 220px;
+  overflow-y: auto;
+  z-index: 10;
+  list-style: none;
+  padding: 0.4rem 0;
+  margin: 0;
+}
+
+.dropdownItem {
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+  color: $color-text-dark;
+}
+
+.dropdownItemActive {
+  background: $color-primary;
+  font-weight: 400;
+}
+
+.row {
+  display: flex;
+  gap: 0.75rem;
+
+  .input {
+    flex: 1;
+  }
+
+  .customSelect {
+    flex: 1;
+
+    .selectBtn {
+      flex: unset;
+    }
+  }
+}
+
+.fileRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+
+  .fileLabel {
+    font-size: 1rem;
+    color: $color-text-muted-dark;
+  }
+
+  .fileInputRow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .fileBtn {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid $color-text-muted-dark;
+    border-radius: 0.25rem;
+    background: none;
+    font-size: 1rem;
+    font-weight: 300;
+    color: $color-text-muted-dark;
+  }
+
+  .fileName {
+    font-size: 1.125rem;
+    color: $color-text-muted-dark;
+  }
+
+  .hiddenFile {
+    display: none;
+  }
+}
+
+.error {
+  font-size: 0.85rem;
+  color: $color-error;
+}
+
+.btn {
+  margin-top: 0.5rem;
+  padding: 1rem;
+  background: $color-primary;
+  border: none;
+  border-radius: 5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  color: $color-text-dark;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
