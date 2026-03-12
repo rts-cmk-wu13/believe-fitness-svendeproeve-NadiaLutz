@@ -34,12 +34,11 @@ export default function SignupPage() {
     setServerError(null)
     setIsPending(true)
 
-    const { email, password } = result.data
-    const body = new URLSearchParams({ username: email, password })
+    const { name, email, password } = result.data
     const res = await bfFetch("/api/v1/users", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: body.toString(),
+      body: new URLSearchParams({ username: email, password }).toString(),
     })
 
     if (!res.ok) {
@@ -49,6 +48,7 @@ export default function SignupPage() {
     }
 
     await login(email, password)
+    localStorage.setItem("displayName", name.trim())
     router.push("/")
   }
 

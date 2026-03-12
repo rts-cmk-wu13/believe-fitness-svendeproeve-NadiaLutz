@@ -49,6 +49,7 @@ export function NavProvider({ children }) {
     localStorage.removeItem("token")
     localStorage.removeItem("userId")
     localStorage.removeItem("role")
+    localStorage.removeItem("displayName")
   }
 
   return (

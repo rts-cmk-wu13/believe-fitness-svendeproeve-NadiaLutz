@@ -1,0 +1,83 @@
+@use "@/styles/tokens" as *;
+
+.splash {
+  position: relative;
+  height: 50.75rem;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 3rem 2rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(0, 0, 0, 0.75) 100%
+    );
+    pointer-events: none;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: $color-primary;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: $color-text-light;
+  font-weight: 600;
+
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 1.5rem;
+    height: 2px;
+    background-color: $color-text-light;
+    flex-shrink: 0;
+  }
+}
+
+.btn {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 60%;
+  margin-inline: auto;
+  text-align: center;
+  background-color: $color-primary;
+  color: $color-text-dark;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1rem;
+  border-radius: 2rem;
+  opacity: 0;
+  transform: translateY(1.5rem);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+
+  &.btnVisible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}

@@ -70,7 +70,7 @@ export default function ProfilePage() {
 
   if (!isLoggedIn) return null
 
-  const fullName = user ? (user.userFirstName + " " + user.userLastName).trim() || user.username : ""
+  const fullName = user ? ((user.userFirstName ?? "") + " " + (user.userLastName ?? "")).trim() || localStorage.getItem("displayName") || user.username : ""
   const role = user?.role === "admin" ? "Instructor" : "Member"
 
 

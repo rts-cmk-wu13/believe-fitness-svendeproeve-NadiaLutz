@@ -1,26 +1,35 @@
+"use client"
+
+import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 import Hero from "@/components/landing/Hero"
 import News from "@/components/landing/News"
 import Testimonials from "@/components/landing/Testimonials"
 import NewsletterForm from "@/components/landing/NewsletterForm"
 import ContactForm from "@/components/landing/ContactForm"
-import Brand from "@/components/Brand"
 import styles from "./landing.module.scss"
 
 export default function LandingPage() {
+  const router = useRouter()
+  const [ready, setReady] = useState(false)
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("splashSeen")) {
+      router.replace("/splash")
+    } else {
+      setReady(true)
+    }
+  }, [])
+
+  if (!ready) return null
+
   return (
-    <main className={styles.landing}>
+    <div className={styles.landing}>
       <Hero />
       <News />
-      <NewsletterForm />
       <Testimonials />
+      <NewsletterForm />
       <ContactForm />
-      <footer className={styles.landingFooter}>
-        <Brand />
-        <address className={styles.landingAddress}>
-          <p>Rabalderstræde 48 - 4000 Roskilde</p>
-          <p>hello@believe-fitness.com</p>
-        </address>
-      </footer>
-    </main>
+    </div>
   )
 }
