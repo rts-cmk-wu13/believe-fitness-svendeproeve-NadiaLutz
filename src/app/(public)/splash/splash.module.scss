@@ -38,20 +38,20 @@
 }
 
 .tagline {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  position: relative;
   font-size: 1rem;
   color: $color-text-light;
   font-weight: 600;
 
   &::before {
     content: "";
-    display: inline-block;
+    position: absolute;
+    left: -2.25rem;
+    top: 50%;
+    transform: translateY(-50%);
     width: 1.5rem;
     height: 2px;
     background-color: $color-text-light;
-    flex-shrink: 0;
   }
 }
 

@@ -10,11 +10,13 @@ export function NavProvider({ children }) {
   const [token, setToken] = useState(null)
   const [userId, setUserId] = useState(null)
   const [role, setRole] = useState(null)
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     setToken(localStorage.getItem("token"))
     setUserId(localStorage.getItem("userId"))
     setRole(localStorage.getItem("role"))
+    setLoaded(true)
   }, [])
 
   const isLoggedIn = !!token
@@ -53,7 +55,7 @@ export function NavProvider({ children }) {
   }
 
   return (
-    <NavContext.Provider value={{ isOpen, toggle, close, isLoggedIn, isAdmin, token, userId, login, logout }}>
+    <NavContext.Provider value={{ isOpen, toggle, close, isLoggedIn, isAdmin, token, userId, login, logout, loaded }}>
       {children}
     </NavContext.Provider>
   )

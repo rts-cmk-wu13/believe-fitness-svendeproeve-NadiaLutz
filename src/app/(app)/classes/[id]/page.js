@@ -105,10 +105,12 @@ export default function ClassDetailPage() {
         <img className={styles.heroImage} src={cls.asset?.url} alt={cls.className} />
         <div className={styles.heroOverlay}>
           <h2 className={styles.className}>{cls.className}</h2>
-          <div className={styles.rating}>
-            {Array.from({ length: getAverage(ratings) }, (_, i) => <FaStar key={i} />)}
-            <span className={styles.ratingText}>{getAverage(ratings)}/5</span>
-          </div>
+          {getAverage(ratings) > 0 && (
+            <div className={styles.rating}>
+              {Array.from({ length: getAverage(ratings) }, (_, i) => <FaStar key={i} />)}
+              <span className={styles.ratingText}>{getAverage(ratings)}/5</span>
+            </div>
+          )}
         </div>
       </div>
 

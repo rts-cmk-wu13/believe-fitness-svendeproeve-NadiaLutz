@@ -56,7 +56,7 @@ export default function SignupPage() {
     <main className={styles.page}>
       <BurgerBtn className={styles.burgerBtn} />
       <Brand className={styles.brand} />
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <h2 className={styles.heading}>Sign up as a new user</h2>
 
         <div className={styles.field}>

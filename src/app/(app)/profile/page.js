@@ -9,17 +9,20 @@ import PageHeader from "@/components/PageHeader"
 import { FaUser } from "react-icons/fa6"
 import { FiEdit } from "react-icons/fi"
 import { AiOutlineDelete } from "react-icons/ai"
+import ConfirmModal from "@/components/ConfirmModal"
 import styles from "./profile.module.scss"
 
 export default function ProfilePage() {
   const router = useRouter()
-  const { isLoggedIn, isAdmin, token, userId } = useNav()
+  const { isLoggedIn, isAdmin, token, userId, loaded } = useNav()
   const [user, setUser] = useState(null)
   const [classes, setClasses] = useState([])
   const [allClasses, setAllClasses] = useState([])
-  const [participantsView, setParticipantsView] = useState(null) 
+  const [participantsView, setParticipantsView] = useState(null)
+  const [pendingDelete, setPendingDelete] = useState(null)
 
   useEffect(() => {
+    if (!loaded) return
     if (!isLoggedIn) {
       router.push("/login")
       return
@@ -50,7 +53,7 @@ export default function ProfilePage() {
         }
       })
     }
-  }, [isLoggedIn, isAdmin, token, userId])
+  }, [isLoggedIn, isAdmin, token, userId, loaded])
 
   async function handleLeave(classId) {
     const res = await bfFetch(`/api/v1/users/${userId}/classes/${classId}`, {
@@ -66,6 +69,7 @@ export default function ProfilePage() {
       headers: { Authorization: `Bearer ${token}` },
     })
     if (res.ok) setAllClasses((prev) => prev.filter((c) => c.id !== classId))
+    setPendingDelete(null)
   }
 
   if (!isLoggedIn) return null
@@ -77,7 +81,7 @@ export default function ProfilePage() {
   if (participantsView) {
     return (
       <main className={styles.page}>
-        <PageHeader title="My Profile" />
+        <PageHeader title="My Profile" onBack={() => setParticipantsView(null)} />
         <div className={styles.userCard}>
           <FaUser className={styles.avatar} />
           <div>
@@ -106,6 +110,14 @@ export default function ProfilePage() {
   return (
     <main className={styles.page}>
       <PageHeader title="My Profile" />
+      {pendingDelete && (
+        <ConfirmModal
+          title="Delete class"
+          message={`Are you sure you want to delete "${pendingDelete.className}"?`}
+          onConfirm={() => handleDeleteClass(pendingDelete.id)}
+          onCancel={() => setPendingDelete(null)}
+        />
+      )}
 
       <div className={styles.userCard}>
         <FaUser className={styles.avatar} />
@@ -131,7 +143,7 @@ export default function ProfilePage() {
                 </button>
                 <div className={styles.iconActions}>
                   <Link href={`/classes/${cls.id}/edit`} className={styles.iconBtn}><FiEdit /></Link>
-                  <button className={styles.iconBtn} onClick={() => handleDeleteClass(cls.id)}><AiOutlineDelete /></button>
+                  <button className={styles.iconBtn} onClick={() => setPendingDelete(cls)}><AiOutlineDelete /></button>
                 </div>
               </div>
             </div>

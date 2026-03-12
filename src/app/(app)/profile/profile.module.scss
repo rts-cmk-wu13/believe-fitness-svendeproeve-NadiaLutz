@@ -81,7 +81,6 @@
         text-transform: uppercase;
         text-decoration: none;
         color: $color-text-dark;
-        cursor: pointer;
       }
 
       .iconActions {
@@ -127,6 +126,16 @@
   .empty {
     color: $color-text-muted;
   }
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: $color-text-dark;
+  display: block;
 }
 
 .participantsPage {

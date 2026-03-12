@@ -67,36 +67,40 @@ export default function SearchPage() {
         />
       </div>
 
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Popular classes</h2>
-        <div className={styles.classRow}>
-          {filteredClasses.map((cls) => (
-            <Link key={cls.id} href={`/classes/${cls.id}`} className={styles.classCard}>
-              <img src={cls.asset?.url} alt={cls.className} className={styles.classImg} />
-              <div className={styles.classLabel}>
-                <p className={styles.className}>{cls.className}</p>
-                <Stars count={getAverage(ratings[cls.id])} />
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
+      {(!q || filteredClasses.length > 0) && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Popular classes</h2>
+          <div className={styles.classRow}>
+            {filteredClasses.map((cls) => (
+              <Link key={cls.id} href={`/classes/${cls.id}`} className={styles.classCard}>
+                <img src={cls.asset?.url} alt={cls.className} className={styles.classImg} />
+                <div className={styles.classLabel}>
+                  <p className={styles.className}>{cls.className}</p>
+                  <Stars count={getAverage(ratings[cls.id])} />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
-      <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Popular Trainers</h2>
-        <div className={styles.trainerList}>
-          {filteredTrainers.map((trainer) => (
-            <div key={trainer.id} className={styles.trainerRow}>
-              {trainer.asset?.url ? (
-                <img src={trainer.asset.url} alt={trainer.trainerName} className={styles.trainerImg} />
-              ) : (
-                <div className={styles.trainerImgPlaceholder} />
-              )}
-              <span className={styles.trainerName}>{trainer.trainerName}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      {(!q || filteredTrainers.length > 0) && (
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Popular Trainers</h2>
+          <div className={styles.trainerList}>
+            {filteredTrainers.map((trainer) => (
+              <div key={trainer.id} className={styles.trainerRow}>
+                {trainer.asset?.url ? (
+                  <img src={trainer.asset.url} alt={trainer.trainerName} className={styles.trainerImg} />
+                ) : (
+                  <div className={styles.trainerImgPlaceholder} />
+                )}
+                <span className={styles.trainerName}>{trainer.trainerName}</span>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   )
 }
