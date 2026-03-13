@@ -50,7 +50,7 @@ export default function ClassesPage() {
 
       {featured && (
         <Link href={`/classes/${featured.id}`} className={styles.featured}>
-          <img src={featured.asset.url} alt={featured.className} className={styles.featuredImg} />
+          <img src={featured.asset?.url} alt={featured.className} className={styles.featuredImg} />
           <div className={styles.featuredOverlay}>
             <h2 className={styles.featuredName}>
               {featured.className}
@@ -64,7 +64,7 @@ export default function ClassesPage() {
       <div className={styles.list}>
         {classes.map((cls) => (
           <Link key={cls.id} href={`/classes/${cls.id}`} className={styles.card}>
-            <img src={cls.asset.url} alt={cls.className} className={styles.cardImg} />
+            <img src={cls.asset?.url} alt={cls.className} className={styles.cardImg} />
             <div className={styles.cardLabel}>
               <p className={styles.cardName}>{cls.className}</p>
               <Stars count={getAverage(ratings[cls.id] ?? [])} />

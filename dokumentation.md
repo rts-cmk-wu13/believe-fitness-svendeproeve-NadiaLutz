@@ -8,57 +8,50 @@ og instruktører (admin) kan se alle tilmeldte medlemmer til de pågældende hol
 ## Tech stack
 
 - **Next.js**
-– Jeg valgte Next.js fordi det giver mig filbaseret routing via App Router og mulighed for API-routes,<br>
- uden at jeg selv skal sætte en backend op. Jeg bruger en API-route (`/api/bf/[...path]`) som proxy til det eksterne API, så tokens ikke vises i browseren.
-
-- **React**
-– Jeg bruger React's `useState` til at styre formstate, fejlbeskeder og loading-tilstand. `useRouter` håndterer<br>
-navigation efter succesfulde handlinger, og `useEffect` bruges til at hente data fra API'et, når en side loader.<br>
+– Jeg valgte Next.js fordi det giver routing via App Router og mulighed for API-routes, uden at jeg selv skal sætte en backend op. Jeg bruger en API-route (/api/bf/[...path]) som proxy til det eksterne API, så tokens ikke vises i browseren. I Next.js bruger jeg React-hooks som useState til at styre formstate, fejlbeskeder og loading-tilstand, useEffect til at hente data når en side loader, og useRouter til navigation efter login, oprettelse og lignende.
 
 - **Zod**
-– Jeg ville have ét sted, der validerer input og giver brugbare fejlbeskeder,<br>
-så jeg ikke selv er nødt til at skrive en masse betingede sætninger.<br>
-Zod kører klientside inden data sendes til API'et. Med `z.coerce.number()` håndterer jeg, at formdata altid ankommer som strings — selvom feltet skal være et tal.<br>
+– Zod samler al validering ét sted og giver brugbare fejlbeskeder uden at jeg selv skal skrive en masse if-checks. Med z.coerce.number() håndterer jeg at formdata altid ankommer som strings, selvom feltet — som f.eks. maxParticipants — skal være et tal.
 
-- **SASS** 
-– Jeg valgte SASS frem for f.eks. Tailwind, fordi jeg finder det mere overskueligt at arbejde med og har mest erfaring 
-med det. SASS moduler sikrer også at mine klasser ikke skaber konflikter på tværs af komponenter,<br>
- og `_tokens.scss` samler alle variabler ét sted. Det giver også en mere clean kode, i stedet for uendelige lange elementer med inline tailwind styling. 
+- **SASS**
+– Jeg valgte SASS frem for f.eks. Tailwind, fordi jeg finder det mere overskueligt at arbejde med og har mest erfaring med det. SASS-moduler sikrer at mine klasser ikke skaber konflikter på tværs af komponenter, og _tokens.scss samler alle variabler ét sted.
 
 - **Believe Fitness API**
-– Eksternt REST API som leverer data om hold, trænere og brugere. <br>
-Al kommunikation med API'et sker gennem min egen API-route proxy, så API-nøgler og tokens aldrig eksponeres direkte i browseren.
+– Eksternt REST API som leverer data om hold, trænere og brugere.
 
 
 ## Kodeeksempel
 
-Jeg har valgt `SignupPage` som eksempel, fordi den har lidt af det hele:
+Jeg har valgt SignupPage som eksempel, fordi den har lidt af det hele:<br>
 klientside formhåndtering, Zod-validering og API-kald med fejlhåndtering.
 
 ### Sådan fungerer det
 
-Når en bruger åbner signup-siden, møder de en formular med fire felter: navn, email, password og gentag password.
+Når en bruger åbner signup-siden, er der en formular med fire felter: <br>
+navn, email, password og gentag password.
 
-<img src="image.png" style="width:15%" />
+<img src="image.png" style="width:25%" />
 
-Inden formularen overhovedet kalder API'et, tjekker siden om det brugeren har skrevet er korrekt. <br>
-Det sker via Zod-skemaet. Prøver brugeren at indsende med et forkert email-format, kommer en custom error besked,<br>
-da jeg har sat den til noValidate. <br>
+Inden formularen overhovedet kalder API'et, validerer Zod om input'et er korrekt. <br>
+Prøver brugeren at indsende med et forkert email-format, kommer en custom error besked,<br>
+da jeg har sat den til noValidate. 
 
-<img src="image2.png" style="width:15%" />
+<img src="image2.png" style="width:25%" />
 
-Hvis der er generelle fejl, stopper siden op og viser en fejlbesked direkte under det relevante felt — uden at der bliver lavet et API-kald.
+Hvis der er generelle fejl, stopper siden og viser en fejlbesked direkte under det relevante felt, inden der bliver lavet et API-kald.
 
 
-<img src="image3.png" style="width:15%" />
+<img src="image3.png" style="width:25%" />
 
 Hvis brugerens passwords ikke matcher, kommer der også en fejlbesked.
 
-<img src="image4.png" style="width:15%" />
+<img src="image4.png" style="width:25%" />
 
 
-Er alt korrekt, sendes en POST-request til API'et med brugerens data. <br>
-Lykkes det, logges brugeren automatisk ind og sendes videre til forsiden. Går det galt på API-siden, vises en generel fejlbesked nederst i formularen, over knappen.
+Er alt korrekt, sendes et POST-request til API'et med brugerens data. <br>
+Lykkes det, logges brugeren automatisk ind og sendes videre til forsiden. <br>
+Går det galt på API-siden, bliver der vist en fejlbesked nederst i formularen.
+
 
 ```javascript
 "use client"
@@ -127,8 +120,7 @@ export default function SignupPage() {
             className={styles.input}
             type="text"
             name="name"
-            placeholder="Enter your name..."
-          />
+            placeholder="Enter your name..."/>
           {errors.name && <p className={styles.error}>{errors.name[0]}</p>}
         </div>
 
@@ -137,8 +129,7 @@ export default function SignupPage() {
             className={styles.input}
             type="email"
             name="email"
-            placeholder="Enter your email..."
-          />
+            placeholder="Enter your email..."/>
           {errors.email && <p className={styles.error}>{errors.email[0]}</p>}
         </div>
 
@@ -147,8 +138,7 @@ export default function SignupPage() {
             className={styles.input}
             type="password"
             name="password"
-            placeholder="Enter your password..."
-          />
+            placeholder="Enter your password..."/>
           {errors.password && <p className={styles.error}>{errors.password[0]}</p>}
         </div>
 
@@ -157,8 +147,7 @@ export default function SignupPage() {
             className={styles.input}
             type="password"
             name="repeatPassword"
-            placeholder="Repeat your password..."
-          />
+            placeholder="Repeat your password..."/>
           {errors.repeatPassword && <p className={styles.error}>{errors.repeatPassword[0]}</p>}
         </div>
 
@@ -174,28 +163,47 @@ export default function SignupPage() {
 ```
 
 
-
 ## Beskrivelse af koden
 
-`SignupPage` er markeret med `"use client"` øverst, fordi den bruger React state og lytter på brugerinteraktion direkte i browseren.
+SignupPage er markeret med "use client" øverst, fordi den bruger React state<br>
+og lytter efter interaktioner fra brugeren direkte i browseren.
 
-Til state bruger siden: `errors` fra Zod, `serverError` til fejl fra API'et, og `isPending` til at disable knappen mens der ventes på svar — så brugeren ikke kan trykke to gange.<br>
-Når formularen sendes, samler `handleSubmit` de fire værdier fra felterne og sender dem til `signupSchema.safeParse()`. <br>
-Returnerer Zod fejl, opdateres `errors`-state og funktionen stopper — intet API-kald sker. Er alt gyldigt, nulstilles fejlene og `isPending` sættes til `true`.
+Til state bruger siden: errors fra Zod, serverError til fejl fra API'et, <br>
+og isPending til at disable knappen mens der ventes på svar, <br>
+så brugeren ikke kan trykke to gange.
+Når formularen sendes, tager handleSubmit de fire værdier fra felterne <br>
+og sender dem til signupSchema.safeParse().
 
-Derefter bygges request-body'en som `URLSearchParams` (det format API'et forventer) og sendes via `bfFetch`. Er svaret ikke `ok`, vises en serverfejl og `isPending` sættes tilbage til `false`. <br>
-Lykkes det, køres `login()` fra `NavContext` — som gemmer token og opdaterer login-state globalt.
+Jeg bruger safeParse() frem for parse(), fordi safeParse ikke crasher ved ugyldigt input, <br>
+den returnerer i stedet et objekt med success: true eller false, <br>
+så man selv kan håndtere fejlen uden at skulle pakke det ind i en try/catch.
 
-Da API'et ikke understøtter at gemme brugerens navn ved oprettelse, gemmes navnet i stedet i `localStorage` under nøglen `displayName`. <br>
-Profilsiden læser denne værdi som fallback, når API'et ikke returnerer et navn. Til sidst sendes brugeren videre til forsiden med `router.push("/")`.
+Det er et bevidst valg at validere klientside først, fordi fejl bliver opdaget med det samme,<br>
+uden at der overhovedet sendes en request.<br>
+Er der fejl, opdateres errors-state og funktionen stopper. <br>
+Er alt gyldigt, nulstilles fejlene og isPending sættes til true.
+
+Formularen har noValidate, hvilket forhindrer browserens validering i at køre. <br>
+Uden det ville browseren vise sine egne fejlbeskeder, før Zod overhovedet nåede at validere<br>
+og derfor ødelægge den brugerdefinerede fejlvisning.
+
+Derefter sendes dataen via bfFetch. Går det galt, vises en serverfejl<br>
+og isPending sættes tilbage til false. Lykkes det, køres login() fra NavContext,<br>
+som gemmer token og opdaterer login-state.
+
+Da API'et ikke understøtter at gemme brugerens navn ved oprettelse, <br>
+gemmes navnet i stedet i localStorage under nøglen "displayName". <br>
+Profilsiden læser denne værdi som fallback, når API'et ikke returnerer et navn.<br>
+Til sidst sendes brugeren videre til forsiden med router.push("/").
 
 
 ## Ekstraopgave 
 
 ### Opgave B - Opret bruger
 
-Da vi tidligere har arbejdet med "Create new user", valgte jeg denne ekstra opgave. Nedenfor ses det Zod-schema, der bruges i `SignupPage` til at validere brugerens input<br>
- — herunder at de to passwords matcher, før der sendes data til API'et.
+Da vi tidligere har arbejdet med "Create new user", valgte jeg denne ekstra opgave.<br> 
+Nedenfor ses det Zod-schema, der bruges i SignupPage til at validere brugerens input,<br>
+herunder at de to passwords matcher, før der sendes data til API'et.
 
 ```javascript
 export const signupSchema = z.object({
@@ -209,14 +217,25 @@ export const signupSchema = z.object({
 })
 ```
 
+.refine() bruges til at tilføje en ekstra valideringsregel, som ikke er indbygget i Zod,<br>
+som i dette tilfælde om de to passwords er ens. path fortæller Zod,<br>
+at fejlbeskeden skal knyttes til repeatPassword-feltet, så den dukker op det rigtige sted i formularen.
+
+Er skemaet gyldigt, sendes et POST-request til /api/v1/users med email og password.<br> 
+POST bruges fordi der bliver oprettet noget nyt. <br>
+Lykkes det, logges brugeren automatisk ind og sendes videre til forsiden.
+
+
+
 ### Opgave C - Opret, rediger og slet en "class"
 
 Jeg valgte også at implementere denne funktion, da vi har prøvet lignende opgaver tidligere, <br>
 og jeg følte mig nogenlunde sikker i at kunne få det til at fungere inden for deadlinen.
 
-Admins kan oprette nye hold via en formular, der valideres med `createClassSchema` <br>
+Admins kan oprette nye hold via en formular, der valideres med createClassSchema <br>
 og sender data til API'et. Hvert hold kan også slettes direkte fra profilsiden. <br>
-Redigering er implementeret som en separat side (`/classes/[id]/edit`), der henter det eksisterende holds data og sender en PUT-request med de opdaterede data.
+Redigering er implementeret som en separat side (/classes/[id]/edit),<br>
+der henter det eksisterende holds data og sender en PUT-request med de opdaterede data.
 
 
 
@@ -224,15 +243,30 @@ Redigering er implementeret som en separat side (`/classes/[id]/edit`), der hent
 
 Noget af det sværeste i projektet var at finde ud af, hvordan det eksterne API forventede data. 
 
-Undervejs kæmpede jeg med at finde de rigtige data fra API'et, f.eks. alder på medlemmer <br>
-og fandt aldrig ud af, om det havde gemt sig et hemmeligt sted eller om opgaven krævede <br>
-at man hardcode'de medlemmers alder. Derudover når man befinder sig på "Sign Up", er der intet <br>
-felt der kræver alder, så en ny-oprettet bruger vil aldrig have en alder, derfor burde de <br>
-predefinerede brugere i API'et heller ikke have det. Jeg har derfor udeladt alder, da <br>
-det gav mest mening. 
+Undervejs kæmpede jeg med og brugte meget tid på at finde de rigtige data fra API'et,<br> 
+f.eks. alder på medlemmer og fandt aldrig ud af, om det havde gemt sig et hemmeligt sted<br> 
+eller om opgaven krævede at man hardcode'de medlemmers alder. <br>
+Derudover når man befinder sig på "Sign Up", er der intet felt der kræver alder,<br> 
+så en ny-oprettet bruger vil aldrig have en alder, derfor burde de predefinerede brugere i API'et <br>
+heller ikke have det. Jeg har derfor udeladt alder, da det gav mest mening. 
 
-Hvis projektet skulle videreudvikles, ville jeg kigge på:
+Hvis projektet skulle videreudvikles og man skulle kigge på skalerbarheden, ville jeg muligvis overveje:
 
-- **Billedoptimering** — billeder vises med `<img>`, men Next.js's `<Image>`-komponent giver lazy loading og automatisk størrelsesjustering.
-- **Bedre API-fejlbeskeder** — den eksterne API returnerer generiske 500-fejl uden forklaring, hvilket gør fejlfinding svær. Et mere robust API ville returnere strukturerede fejlbeskeder.
-- **Tests** — projektet har ingen automatiserede tests. Unit tests på Zod-skemaerne og integrationstests på API-kaldene ville gøre det tryggere at ændre i koden fremover.
+- **Billedoptimering** — billeder vises med en almindelig img-tag frem for Next.js's Image-komponent, <br>
+fordi Image kræver at man på forhånd whitelister eksterne billeddomæner i next.config.js,<br>
+hvilket ikke er praktisk når billederne kommer fra et API man ikke selv kontrollerer.
+- **Bedre API-fejlbeskeder** — det eksterne API returnerer generiske 500-fejl uden forklaring,<br> 
+hvilket gør fejlfinding svær. Et mere robust API ville returnere strukturerede fejlbeskeder.
+- **Loading states** — mange sider viser ingenting mens data hentes fra API'et. <br>
+Skeleton loaders ville måske være værd at overveje.
+
+
+## Opsummering
+
+
+Alt i alt var projektet sjovt, men udfordrende. <br>
+At arbejde med et eksternt API man ikke selv kontrollerer kræver en del tilpasning undervejs,<br> 
+og man lærer at designe sin kode så den kan håndtere manglende eller uventet data.
+
+Jeg er umiddelbart tilfreds med resultatet. Appen indeholder de vigtigste funktioner,<br>
+ koden er overskuelig, og jeg har fået brugt de teknologier jeg satte mig for fra starten.

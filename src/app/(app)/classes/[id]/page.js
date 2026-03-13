@@ -79,6 +79,8 @@ export default function ClassDetailPage() {
 
   if (!cls) return <main className={styles.page}><div className={styles.hero}><PageHeader showBack light /></div></main>
 
+
+
   const participants = cls.users ?? []
   const isFull = cls.maxParticipants != null && participants.length >= cls.maxParticipants
   const sameDayConflict = !enrolled && userClasses.some(
