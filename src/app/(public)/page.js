@@ -7,6 +7,7 @@ import News from "@/components/landing/News"
 import Testimonials from "@/components/landing/Testimonials"
 import NewsletterForm from "@/components/landing/NewsletterForm"
 import ContactForm from "@/components/landing/ContactForm"
+import Footer from "@/components/landing/Footer"
 import styles from "./landing.module.scss"
 
 export default function LandingPage() {
@@ -27,9 +28,10 @@ export default function LandingPage() {
     <div className={styles.landing}>
       <Hero />
       <News />
-      <Testimonials />
       <NewsletterForm />
+      <Testimonials />
       <ContactForm />
+      <Footer />
     </div>
   )
 }

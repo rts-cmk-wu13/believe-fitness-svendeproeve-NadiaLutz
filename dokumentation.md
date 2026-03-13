@@ -2,19 +2,25 @@
 Nadia Lützhøft, WU13
 
 Believe Fitness er en webapplikation for et fitness center, hvor medlemmer kan tilmelde sig hold <br>
-og instruktører (admin) kan se alle tilmeldte medlemmer til de pågældende hold, og derudover oprette og administrere hold. Appen henter informationer fra et eksternt REST API.
+og instruktører (admin) kan se alle tilmeldte medlemmer til de pågældende hold, og derudover oprette og administrere hold.<br> 
+Appen henter informationer fra et eksternt REST API.
 
 
 ## Tech stack
 
 - **Next.js**
-– Jeg valgte Next.js fordi det giver routing via App Router og mulighed for API-routes, uden at jeg selv skal sætte en backend op. Jeg bruger en API-route (/api/bf/[...path]) som proxy til det eksterne API, så tokens ikke vises i browseren. I Next.js bruger jeg React-hooks som useState til at styre formstate, fejlbeskeder og loading-tilstand, useEffect til at hente data når en side loader, og useRouter til navigation efter login, oprettelse og lignende.
+– Jeg valgte Next.js fordi det giver routing via App Router og mulighed for API-routes, uden at jeg selv skal sætte en backend op. <br> 
+Jeg bruger en API-route (/api/bf/[...path]) som proxy til det eksterne API, så tokens ikke vises i browseren. <br>
+I Next.js bruger jeg React-hooks som useState til at styre formstate, fejlbeskeder og loading-tilstand, useEffect til at hente data når en side loader,<br> 
+og useRouter til navigation efter login, oprettelse og lignende.
 
 - **Zod**
-– Zod samler al validering ét sted og giver brugbare fejlbeskeder uden at jeg selv skal skrive en masse if-checks. Med z.coerce.number() håndterer jeg at formdata altid ankommer som strings, selvom feltet — som f.eks. maxParticipants — skal være et tal.
+– Zod samler al validering ét sted og giver brugbare fejlbeskeder uden at jeg selv skal skrive en masse if-checks. <br>
+Med z.coerce.number() håndterer jeg at formdata altid ankommer som strings, selvom feltet — som f.eks. maxParticipants — skal være et tal.
 
 - **SASS**
-– Jeg valgte SASS frem for f.eks. Tailwind, fordi jeg finder det mere overskueligt at arbejde med og har mest erfaring med det. SASS-moduler sikrer at mine klasser ikke skaber konflikter på tværs af komponenter, og _tokens.scss samler alle variabler ét sted.
+– Jeg valgte SASS frem for f.eks. Tailwind, fordi jeg finder det mere overskueligt at arbejde med og har mest erfaring med det. <br>
+SASS-moduler sikrer at mine klasser ikke skaber konflikter på tværs af komponenter, og _tokens.scss samler alle variabler ét sted.
 
 - **Believe Fitness API**
 – Eksternt REST API som leverer data om hold, trænere og brugere.
@@ -30,22 +36,22 @@ klientside formhåndtering, Zod-validering og API-kald med fejlhåndtering.
 Når en bruger åbner signup-siden, er der en formular med fire felter: <br>
 navn, email, password og gentag password.
 
-<img src="image.png" style="width:25%" />
+<img src="image.png" style="width:20%" />
 
 Inden formularen overhovedet kalder API'et, validerer Zod om input'et er korrekt. <br>
 Prøver brugeren at indsende med et forkert email-format, kommer en custom error besked,<br>
-da jeg har sat den til noValidate. 
+fordi formularen bruger `noValidate`.
 
-<img src="image2.png" style="width:25%" />
+<img src="image2.png" style="width:20%" />
 
 Hvis der er generelle fejl, stopper siden og viser en fejlbesked direkte under det relevante felt, inden der bliver lavet et API-kald.
 
 
-<img src="image3.png" style="width:25%" />
+<img src="image3.png" style="width:20%" />
 
 Hvis brugerens passwords ikke matcher, kommer der også en fejlbesked.
 
-<img src="image4.png" style="width:25%" />
+<img src="image4.png" style="width:20%" />
 
 
 Er alt korrekt, sendes et POST-request til API'et med brugerens data. <br>
@@ -165,36 +171,36 @@ export default function SignupPage() {
 
 ## Beskrivelse af koden
 
-SignupPage er markeret med "use client" øverst, fordi den bruger React state<br>
+`SignupPage` er markeret med `"use client"` øverst, fordi den bruger React state<br>
 og lytter efter interaktioner fra brugeren direkte i browseren.
 
-Til state bruger siden: errors fra Zod, serverError til fejl fra API'et, <br>
-og isPending til at disable knappen mens der ventes på svar, <br>
+Til state bruger siden: `errors` fra Zod, `serverError` til fejl fra API'et, <br>
+og `isPending` til at disable knappen mens der ventes på svar, <br>
 så brugeren ikke kan trykke to gange.
-Når formularen sendes, tager handleSubmit de fire værdier fra felterne <br>
-og sender dem til signupSchema.safeParse().
+Når formularen sendes, tager `handleSubmit` de fire værdier fra felterne <br>
+og sender dem til `signupSchema.safeParse()`.
 
-Jeg bruger safeParse() frem for parse(), fordi safeParse ikke crasher ved ugyldigt input, <br>
-den returnerer i stedet et objekt med success: true eller false, <br>
-så man selv kan håndtere fejlen uden at skulle pakke det ind i en try/catch.
+Jeg bruger `safeParse()` frem for `parse()`, fordi `safeParse` ikke crasher ved ugyldigt input, <br>
+den returnerer i stedet et objekt med `success: true` eller `false`, <br>
+så man selv kan håndtere fejlen uden at skulle pakke det ind i en `try/catch`.
 
 Det er et bevidst valg at validere klientside først, fordi fejl bliver opdaget med det samme,<br>
 uden at der overhovedet sendes en request.<br>
-Er der fejl, opdateres errors-state og funktionen stopper. <br>
-Er alt gyldigt, nulstilles fejlene og isPending sættes til true.
+Er der fejl, opdateres `errors`-state og funktionen stopper. <br>
+Er alt gyldigt, nulstilles fejlene og `isPending` sættes til `true`.
 
-Formularen har noValidate, hvilket forhindrer browserens validering i at køre. <br>
+Formularen har `noValidate`, hvilket forhindrer browserens validering i at køre. <br>
 Uden det ville browseren vise sine egne fejlbeskeder, før Zod overhovedet nåede at validere<br>
 og derfor ødelægge den brugerdefinerede fejlvisning.
 
-Derefter sendes dataen via bfFetch. Går det galt, vises en serverfejl<br>
-og isPending sættes tilbage til false. Lykkes det, køres login() fra NavContext,<br>
+Derefter sendes dataen via `bfFetch`. Går det galt, vises en serverfejl<br>
+og `isPending` sættes tilbage til `false`. Lykkes det, køres `login()` fra `NavContext`,<br>
 som gemmer token og opdaterer login-state.
 
 Da API'et ikke understøtter at gemme brugerens navn ved oprettelse, <br>
-gemmes navnet i stedet i localStorage under nøglen "displayName". <br>
+gemmes navnet i stedet i `localStorage` under nøglen `"displayName"`. <br>
 Profilsiden læser denne værdi som fallback, når API'et ikke returnerer et navn.<br>
-Til sidst sendes brugeren videre til forsiden med router.push("/").
+Til sidst sendes brugeren videre til forsiden med `router.push("/")`.
 
 
 ## Ekstraopgave 
@@ -259,6 +265,8 @@ hvilket ikke er praktisk når billederne kommer fra et API man ikke selv kontrol
 hvilket gør fejlfinding svær. Et mere robust API ville returnere strukturerede fejlbeskeder.
 - **Loading states** — mange sider viser ingenting mens data hentes fra API'et. <br>
 Skeleton loaders ville måske være værd at overveje.
+- **Delete participants** - det ville måske være en fordel at kunne slette brugere fra admin siden, <br>
+eller en form for automatisering så holdene ikke er fyldt op med ikke-aktive brugere.  
 
 
 ## Opsummering

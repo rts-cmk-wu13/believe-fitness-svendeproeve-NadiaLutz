@@ -1,0 +1,39 @@
+@use "@/styles/tokens" as *;
+
+.footer {
+  background: $color-bg-light;
+  text-align: center;
+  padding: 2.5rem 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+
+  &::before {
+    content: "";
+    width: 2.75rem;
+    height: 2px;
+    background-color: $color-bg-dark;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.name {
+  color: $color-primary;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: $color-text-dark;
+  margin: 0 0 1rem;
+}
+
+.info {
+  font-size: 0.9rem;
+  color: $color-text-dark;
+  margin: 0;
+}

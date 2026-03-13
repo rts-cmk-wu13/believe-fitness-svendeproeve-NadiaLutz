@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import { bfFetch } from "@/lib/api"
 import { useNav } from "@/components/nav/NavContext"
 import PageHeader from "@/components/PageHeader"
@@ -15,8 +15,7 @@ function getAverage(ratings) {
 
 export default function ClassDetailPage() {
   const { id } = useParams()
-  const router = useRouter()
-  const { isLoggedIn, isAdmin, token, userId } = useNav()
+const { isLoggedIn, isAdmin, token, userId } = useNav()
   const [cls, setCls] = useState(null)
   const [ratings, setRatings] = useState([])
   const [trainerAsset, setTrainerAsset] = useState(null)
@@ -78,7 +77,6 @@ export default function ClassDetailPage() {
   }
 
   if (!cls) return <main className={styles.page}><div className={styles.hero}><PageHeader showBack light /></div></main>
-
 
 
   const participants = cls.users ?? []

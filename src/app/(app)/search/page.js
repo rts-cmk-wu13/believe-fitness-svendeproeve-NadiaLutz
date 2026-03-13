@@ -49,8 +49,15 @@ export default function SearchPage() {
   }, [])
 
   const q = query.trim().toLowerCase()
-  const filteredClasses = q ? classes.filter((c) => c.className?.toLowerCase().includes(q)) : classes
+  const filteredClasses = q
+    ? classes.filter((c) =>
+        c.className?.toLowerCase().includes(q) ||
+        c.classDay?.toLowerCase().includes(q) ||
+        c.classDescription?.toLowerCase().includes(q)
+      )
+    : classes
   const filteredTrainers = q ? trainers.filter((t) => t.trainerName?.toLowerCase().includes(q)) : trainers
+  const noResults = q && filteredClasses.length === 0 && filteredTrainers.length === 0
 
   return (
     <main className={styles.page}>
@@ -66,6 +73,10 @@ export default function SearchPage() {
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
+
+      {noResults && (
+        <p className={styles.noResults}>Your search did not give any results. Try to search for something else.</p>
+      )}
 
       {(!q || filteredClasses.length > 0) && (
         <section className={styles.section}>

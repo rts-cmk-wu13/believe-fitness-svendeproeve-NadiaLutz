@@ -124,3 +124,10 @@
   font-weight: 600;
   color: $color-text-dark;
 }
+
+.noResults {
+  margin: 2rem 1.25rem 0;
+  color: $color-text-muted;
+  font-size: 0.9rem;
+  text-align: center;
+}
